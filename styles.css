@@ -1,12 +1,13 @@
 :root {
-  --fondo: #0f172a;
-  --superficie: #1e293b;
-  --borde: #334155;
-  --texto: #e2e8f0;
-  --texto-suave: #94a3b8;
-  --primario: #38bdf8;
-  --primario-texto: #0f172a;
-  --peligro: #f87171;
+  /* Paleta tomada de los iconos (placa gris + lente azul) */
+  --fondo: #424247;
+  --superficie: #57575e;
+  --borde: #787881;
+  --texto: #f4f4f6;
+  --texto-suave: #d4d4da;
+  --primario: #61adff;
+  --primario-texto: #1f1f23;
+  --peligro: #ff9e9e;
   --radio: 14px;
 }
 
@@ -99,7 +100,7 @@ body {
   aspect-ratio: 3 / 4;
   border-radius: var(--radio);
   overflow: hidden;
-  background: #020617;
+  background: #2c2c30;
   border: 1px solid var(--borde);
 }
 

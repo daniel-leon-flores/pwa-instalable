@@ -1,6 +1,6 @@
 // Service Worker – estrategia Cache First
 // Cambia la versión cuando modifiques archivos para forzar la actualización del caché.
-const NOMBRE_CACHE = 'inspeccion-pwa-v1';
+const NOMBRE_CACHE = 'inspeccion-pwa-v2';
 
 const ARCHIVOS_PRECACHE = [
   './',
