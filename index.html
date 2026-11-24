@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Captura de evidencia fotográfica con acceso consciente a cámara.">
+  <title>Inspección Visual PWA</title>
+
+  <!-- Instalabilidad -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Soporte iOS / Safari -->
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="InspecciónPWA">
+
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="encabezado">
+    <div class="marca">
+      <img src="./icons/icon-192.png" alt="" width="40" height="40">
+      <div>
+        <h1>Inspección Visual</h1>
+        <p class="subtitulo">PWA instalable · Cámara con consentimiento</p>
+      </div>
+    </div>
+    <button id="btn-instalar" class="btn btn-secundario" type="button" hidden>
+      Instalar App
+    </button>
+  </header>
+
+  <main class="contenido">
+    <!-- Mensaje de estado (anunciado por lectores de pantalla) -->
+    <p id="mensaje-estado" class="estado" role="status" aria-live="polite">
+      Cámara apagada.
+    </p>
+
+    <!-- Visor de cámara -->
+    <section class="visor" aria-label="Vista previa de la cámara">
+      <video id="visor-camara" autoplay playsinline muted></video>
+      <div id="visor-vacio" class="visor-vacio">
+        <span aria-hidden="true">📷</span>
+        <p>La vista previa aparecerá aquí</p>
+      </div>
+    </section>
+
+    <!-- Paso 1: intención inicial (NO llama al hardware) -->
+    <button id="btn-preparar-camara" class="btn btn-primario" type="button">
+      Solicitar Acceso a Cámara
+    </button>
+
+    <!-- Paso 2: tarjeta de aviso ético (pre-permiso) -->
+    <section id="aviso-permiso" class="aviso" role="dialog" aria-labelledby="aviso-titulo" hidden>
+      <h2 id="aviso-titulo">Antes de encender la cámara</h2>
+      <p>
+        Esta aplicación requiere acceso a tu cámara únicamente para mostrar una
+        vista previa local en pantalla. Ninguna imagen se envía a servidores externos.
+      </p>
+      <ul>
+        <li><strong>¿Para qué?</strong> Para inspeccionar visualmente en tiempo real.</li>
+        <li><strong>¿Qué cámara?</strong> Se encenderá primero la cámara <strong>trasera</strong>; podrás cambiar a la frontal.</li>
+        <li><strong>¿Dónde se procesa?</strong> El video se queda en tu dispositivo.</li>
+      </ul>
+      <p class="nota">
+        Tras confirmar, tu navegador mostrará su propio cuadro de permiso.
+        Puedes apagar la cámara en cualquier momento.
+      </p>
+      <div class="acciones">
+        <button id="btn-cancelar-permiso" class="btn btn-secundario" type="button">
+          Ahora no
+        </button>
+        <button id="btn-confirmar-permiso" class="btn btn-primario" type="button">
+          Aceptar y Encender Cámara
+        </button>
+      </div>
+    </section>
+
+    <!-- Controles disponibles solo con la cámara encendida -->
+    <div id="controles-camara" class="acciones" hidden>
+      <button id="btn-alternar-camara" class="btn btn-secundario" type="button">
+        Cambiar a Frontal
+      </button>
+      <button id="btn-apagar-camara" class="btn btn-peligro" type="button">
+        Apagar Cámara
+      </button>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <p id="estado-sw">Service Worker: comprobando…</p>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
