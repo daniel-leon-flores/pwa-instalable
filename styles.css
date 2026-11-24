@@ -163,6 +163,20 @@ body {
   margin-bottom: 4px;
 }
 
+.aviso ol {
+  margin: 0 0 12px;
+  padding-left: 20px;
+}
+
+.guia-ios .btn {
+  width: 100%;
+}
+
+.icono-compartir {
+  vertical-align: -3px;
+  color: var(--primario);
+}
+
 .nota {
   font-size: 0.85rem;
   color: var(--texto-suave);

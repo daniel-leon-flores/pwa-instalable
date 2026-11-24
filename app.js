@@ -94,6 +94,30 @@ window.addEventListener('appinstalled', () => {
   eventoInstalacionDiferido = null;
 });
 
+// ---------- iPhone / iPad (WebKit) ----------
+// iOS nunca dispara beforeinstallprompt, así que #btn-instalar jamás aparece.
+// En su lugar mostramos los pasos manuales (Compartir -> Agregar a inicio).
+function verificarEntornoIOS() {
+  const esIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  // Desde iPadOS 13 el iPad se identifica como "Macintosh"; lo delata su pantalla táctil
+  const esIPadModerno = /Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1;
+
+  const estaInstalada = window.navigator.standalone === true ||
+                        window.matchMedia('(display-mode: standalone)').matches;
+
+  // Si está en iPhone/iPad y aún la ve desde el navegador, mostrar instrucciones manuales
+  if ((esIOS || esIPadModerno) && !estaInstalada) {
+    const guiaIOS = document.getElementById('instrucciones-ios');
+    if (guiaIOS) guiaIOS.hidden = false;
+  }
+}
+
+document.getElementById('btn-cerrar-ios').addEventListener('click', () => {
+  document.getElementById('instrucciones-ios').hidden = true;
+});
+
+verificarEntornoIOS();
+
 // =====================================================================
 // FASE 2: Acceso ético a la cámara
 // =====================================================================
